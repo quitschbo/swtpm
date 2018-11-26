@@ -160,17 +160,7 @@ AC_SUBST([LIBTPMS_LIBS])
 AC_CHECK_LIB(c, clock_gettime, LIBRT_LIBS="", LIBRT_LIBS="-lrt")
 AC_SUBST([LIBRT_LIBS])
 
-AC_PATH_PROG([TPM_NVDEFINE], tpm_nvdefine)
-case $host_os in
-linux-*)
-    if test "x$TPM_NVDEFINE" = "x"; then
-	AC_MSG_ERROR([NVRAM area tools are needed: tpm-tools package])
-    fi
-    have_tcsd=yes
-    ;;
-*)
-    have_tcsd=no
-esac
+have_tcsd=no
 with_swtpm_setup=yes
 AM_CONDITIONAL([HAVE_TCSD], test "$have_tcsd" != "no")
 
